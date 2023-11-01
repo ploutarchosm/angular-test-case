@@ -1,4 +1,4 @@
-You don't need to complete all tasks, only do the ones you are confident you can do well.
+ENG You don't need to complete all tasks, only do the ones you are confident you can do well.
 
 ## General Data
 Primary colors - #435261, #8676b6. Page background - white. Links - #2d6fb1. Base font size - 14px.
@@ -19,11 +19,11 @@ If desired, you can add icons to the profile and Logout links.
 
 Add a page for editing the user's profile. The page should contain a form with the following fields:
 
-Email - readonly
-First name - required, not longer than 255 characters
-Last name - required, not longer than 255 characters
-Phone number - required, 10 characters. "+7" is not entered by the user but is automatically added.
-WebSite URL - optional, valid URL
+* Email - readonly
+* First name - required, not longer than 255 characters
+* Last name - required, not longer than 255 characters
+* Phone number - required, 10 characters. "+7" is not entered by the user but is automatically added.
+* WebSite URL - optional, valid URL
 
 Read and write data from/to the API should be emulated in a separate service.
 
@@ -48,7 +48,7 @@ Authorization should persist after page refresh/closure.
 
 -------------------------------------------------------------
 
-!Не обязательно выполнять все задания, выполните те, которые сделаете уверенно хорошо.   
+RU !Не обязательно выполнять все задания, выполните те, которые сделаете уверенно хорошо.   
 
 ## Общие данные
 
