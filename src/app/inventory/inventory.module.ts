@@ -3,10 +3,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'shared';
-import { HomePageComponent } from './pages/home-page.component';
+import { InventoryPageComponent } from './pages/inventory-page.component';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: InventoryPageComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
@@ -17,6 +17,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
   ],
-  declarations: [HomePageComponent],
+  declarations: [InventoryPageComponent],
 })
-export class HomeModule {}
+export class InventoryModule {}

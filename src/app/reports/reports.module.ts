@@ -3,10 +3,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'shared';
-import { HomePageComponent } from './pages/home-page.component';
+import { ReportsPageComponent } from './pages/reports-page.component';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: ReportsPageComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
@@ -17,6 +17,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
   ],
-  declarations: [HomePageComponent],
+  declarations: [ReportsPageComponent],
 })
-export class HomeModule {}
+export class ReportsModule {}
