@@ -1,0 +1,11 @@
+@import './vendors/_bootstrap';
+
+body,html {
+    height: 100vh;
+}
+
+.layout--top {
+    height: 55px;
+    background: $primary;
+    color: white;
+}

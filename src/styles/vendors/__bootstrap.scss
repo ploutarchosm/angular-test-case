@@ -1,0 +1,8 @@
+$primary: #435261;
+$secondary: #8676b6;
+$link-color: #2d6fb1;
+$font-size-root: 14px; // affects the value of `rem`, for all sizes relative to this value
+
+$enable-cssgrid: true;
+
+@import "bootstrap/scss/bootstrap";
