@@ -1,0 +1,19 @@
+<div class="layout d-flex flex-column vh-100">
+  <div class="header d-flex align-items-center px-3">
+    <ng-content select="[header]"></ng-content>
+  </div>
+  <section class="flex-grow-1">
+    <div class="sidebar">
+      <ul class="nav flex-column h-100">
+        <li class="nav-item" *ngFor="let item of navItems">
+          <a routerLink="/{{ item.router }}" routerLinkActive="active">{{
+            item.label
+          }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="body">
+      <ng-content select="[router]"></ng-content>
+    </div>
+  </section>
+</div>

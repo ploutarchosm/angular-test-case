@@ -2,11 +2,7 @@
 
 body,
 html {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
 }
 
-.layout--top {
-    height: 55px;
-    background: $primary;
-    color: white;
-}
