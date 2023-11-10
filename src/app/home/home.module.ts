@@ -6,7 +6,7 @@ import { SharedModule } from 'shared';
 import { HomePageComponent } from './pages/home-page.component';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: HomePageComponent, title: 'Home' },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

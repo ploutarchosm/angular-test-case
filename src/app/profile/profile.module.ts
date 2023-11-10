@@ -6,7 +6,7 @@ import { SharedModule } from 'shared';
 import { ProfilePageComponent } from './pages/profile-page.component';
 
 const routes: Routes = [
-  { path: '', component: ProfilePageComponent },
+  { path: '', component: ProfilePageComponent, title: 'Profile' },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

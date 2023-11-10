@@ -6,7 +6,7 @@ import { SharedModule } from 'shared';
 import { BillingPageComponent } from './pages/billing-page.component';
 
 const routes: Routes = [
-  { path: '', component: BillingPageComponent },
+  { path: '', component: BillingPageComponent, title: 'Billing' },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

@@ -6,7 +6,7 @@ import { SharedModule } from 'shared';
 import { ReportsPageComponent } from './pages/reports-page.component';
 
 const routes: Routes = [
-  { path: '', component: ReportsPageComponent },
+  { path: '', component: ReportsPageComponent, title: 'Reports' },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

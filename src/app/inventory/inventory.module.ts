@@ -6,7 +6,7 @@ import { SharedModule } from 'shared';
 import { InventoryPageComponent } from './pages/inventory-page.component';
 
 const routes: Routes = [
-  { path: '', component: InventoryPageComponent },
+  { path: '', component: InventoryPageComponent, title: 'Inventory' },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
