@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { IProfile } from '../../app/profile';
+import {IProfile, TProfileServerModel} from '../../app/profile';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -50,5 +50,21 @@ export class AuthService {
     localStorage.removeItem('user');
     this.profileSubject.next(null);
     this.router.navigate(['/auth/login']);
+  }
+
+  public updateProfile(profile: TProfileServerModel) {
+      return this.http
+          .put<IProfile>(
+              `${this.baseUrl}/users/${profile.Id}`,
+              { ...profile },
+              { withCredentials: true }
+          )
+          .pipe(
+              map(profile => {
+                  localStorage.setItem('user', JSON.stringify(profile));
+                  this.profileSubject.next(profile);
+                  return profile;
+              })
+          );
   }
 }

@@ -1,4 +1,66 @@
 <app-page-title>
   <li class="breadcrumb-item active" aria-current="page">Profile</li>
 </app-page-title>
-<app-page-content> test </app-page-content>
+<app-page-content>
+    <form [formGroup]="form" class="row" (ngSubmit)="onSubmit()">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="Email" class="form-label">Email address</label>
+                <input
+                    [ngClass]="{ 'is-invalid': submitted && f.Email.errors }"
+                    type="email"
+                    class="form-control"
+                    id="Email"
+                    formControlName="Email"/>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="FirstName" class="form-label">First Name</label>
+                <input
+                    [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }"
+                    type="text"
+                    class="form-control"
+                    id="FirstName"
+                    formControlName="FirstName" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="LastName" class="form-label">Last Name</label>
+                <input
+                    [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }"
+                    type="text"
+                    class="form-control"
+                    id="LastName"
+                    formControlName="LastName" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="PhoneNumber" class="form-label">Phone Number</label>
+                <input
+                    [ngClass]="{ 'is-invalid': submitted && f.PhoneNumber.errors }"
+                    type="text"
+                    class="form-control"
+                    id="PhoneNumber"
+                    formControlName="PhoneNumber" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="WebSiteURL" class="form-label">Website URL</label>
+                <input
+                    [ngClass]="{ 'is-invalid': submitted && f.WebSiteURL.errors }"
+                    type="text"
+                    class="form-control"
+                    id="WebSiteURL"
+                    formControlName="WebSiteURL" />
+            </div>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</app-page-content>

@@ -1,23 +1,76 @@
-import { Component } from '@angular/core';
-import { FormTyped } from '../../../shared/types/form.type';
-import { IProfile } from '../interfaces/profile.interface';
-import { FormControl, FormGroup } from '@angular/forms';
-
-type TProfile = Omit<FormTyped<IProfile>, 'AuthToken' | 'Role'>;
+import {Component, OnDestroy} from '@angular/core';
+import {TProfileFormModel} from '../interfaces/profile.interface';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {first, Subject, takeUntil} from "rxjs";
+import {ProfileService} from "../../../shared";
 
 @Component({
   selector: 'app-profile-page',
-  templateUrl: './profile-page.component.html',
+  templateUrl: './profile-page.component.html'
 })
-export class ProfilePageComponent {
-  form: FormGroup<TProfile> = new FormGroup<TProfile>({
-    Email: new FormControl<string>(
-      { value: '', disabled: true },
-      { nonNullable: true }
-    ),
-    FirstName: new FormControl<string>('', { nonNullable: true }),
-    LastName: new FormControl<string>('', { nonNullable: true }),
-    PhoneNumber: new FormControl<string>('', { nonNullable: true }),
-    WebSiteURL: new FormControl<string | null>(null),
-  });
+export class ProfilePageComponent implements OnDestroy {
+    _notifier = new Subject<void>();
+    form!: FormGroup<TProfileFormModel>;
+    submitting = false;
+    submitted = false;
+
+    constructor(private profileService: ProfileService) {
+        this.profileService.initialProfile$().pipe(
+            takeUntil(this._notifier)
+        ).subscribe({
+            next: profile  => {
+                this.form =  new FormGroup<TProfileFormModel>({
+                    Id: new FormControl<number>(
+                        { value: profile?.Id!, disabled: true },
+                        { nonNullable: true }
+                    ),
+                    Email: new FormControl<string>(
+                        { value: profile?.Email!, disabled: true },
+                        { nonNullable: true }
+                    ),
+                    FirstName: new FormControl<string>(profile?.FirstName!, {
+                        nonNullable: true, validators: [Validators.required, Validators.maxLength(255)]
+                    }),
+                    LastName: new FormControl<string>(profile?.LastName!, {
+                        nonNullable: true,  validators: [Validators.required, Validators.maxLength(255)] }),
+                    PhoneNumber: new FormControl<string>(profile?.PhoneNumber!, {
+                        nonNullable: true,  validators: [Validators.maxLength(12) ] }),
+                    WebSiteURL: new FormControl<string | null>(profile?.WebSiteURL!, {
+                        validators: [Validators.pattern('')]
+                    }),
+                });
+            }
+        })
+    }
+
+    get f() {
+        return this.form.controls;
+    }
+
+    onSubmit() {
+        this.submitted = true;
+
+        if (this.form.invalid) {
+            return;
+        }
+        this.submitting = true;
+        this.profileService.updateProfile({
+            Id: this.f.Id.value,
+            FirstName: this.f.FirstName.value,
+            LastName: this.f.LastName.value,
+            PhoneNumber: this.f.PhoneNumber.value,
+            WebSiteURL: this.f.WebSiteURL.value
+        }).pipe(first())
+            .subscribe({
+                next: (r) => {
+                },
+                error: error => {
+                    this.submitting = false;
+                },
+            });
+    }
+    ngOnDestroy() {
+        this._notifier.next()
+        this._notifier.complete()
+    }
 }

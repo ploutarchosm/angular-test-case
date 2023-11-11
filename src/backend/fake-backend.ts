@@ -22,7 +22,7 @@ const users: IUsers[] = [
     FirstName: 'Basile',
     LastName: 'Balkwill',
     Email: 'bbalkwill0@ihg.com',
-    PhoneNumber: '+86 612 257 0337',
+    PhoneNumber: '+76122570337',
     WebSiteURL: 'https://weather.com',
     Password: '1234',
     Role: Role.Admin,
@@ -32,7 +32,7 @@ const users: IUsers[] = [
     FirstName: 'Edsel',
     LastName: 'Guyonneau',
     Email: 'eguyonneau1@bravesites.com',
-    PhoneNumber: '+86 843 632 9170',
+    PhoneNumber: '+76843632917',
     WebSiteURL: 'https://about.com',
     Password: '1234',
     Role: Role.User,
@@ -53,8 +53,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       switch (true) {
         case url.endsWith('/auth/login') && method === 'POST':
           return authenticate();
-        case url.match(/\/users\/\d+$/) && method === 'GET':
-          return getUserById();
+          case url.match(/\/users\/\d+$/) && method === 'PUT':
+              return updateUser();
         default:
           return next.handle(request);
       }
@@ -71,6 +71,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         AuthToken: 'fake-jwt-token',
       });
     }
+
+      function updateUser() {
+          if (!isLoggedIn()) return unauthorized();
+
+          let params = body;
+          let user = users.find(x => x.Id === idFromUrl());
+
+          if (!user) return error('Username not found..');
+
+          user.FirstName = params.FirstName;
+          user.LastName = params.LastName;
+          user.PhoneNumber = params.PhoneNumber;
+          user.WebSiteURL = params.WebSiteURL;
+          return ok({
+              ...basicDetails(user),
+              AuthToken: 'fake-jwt-token',
+          });
+      }
 
     function ok(body?: any) {
       return of(new HttpResponse({ status: 200, body })).pipe(delay(500));

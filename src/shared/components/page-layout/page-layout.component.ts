@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../core/services';
 import { Role } from '../../../app/profile';
-import {INavigation} from "../../types/menu.type";
+import {EIcon, INavigation} from "../../types/menu.type";
 import {menu} from "../../helpers/menu.helper";
 
 @Component({
@@ -12,6 +12,7 @@ import {menu} from "../../helpers/menu.helper";
 export class PageLayoutComponent implements OnInit {
   navItems: INavigation[] = [];
   profile = this.authService.profileValue;
+  icon = EIcon;
 
   constructor(
     private authService: AuthService,

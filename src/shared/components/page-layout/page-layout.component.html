@@ -1,14 +1,30 @@
 <div class="layout d-flex flex-column vh-100">
   <div class="header d-flex align-items-center px-3">
-    <ng-content select="[header]"></ng-content>
+      <div class="logo text-white flex-grow-1">
+          AppLogo
+      </div>
+      <div class="profile px-3 h-100 d-flex align-items-center gap-3 bg-secondary text-white">
+          <app-user-solid-icon class="fillWhite mb-1 border rounded-circle"></app-user-solid-icon>
+          <div class="d-flex flex-column justify-content-center ">
+              <span>Ploutarchos Michaelides</span>
+              <small>info@ploutarchosm.com</small>
+          </div>
+      </div>
   </div>
   <section class="flex-grow-1">
     <div class="sidebar">
       <ul class="nav flex-column h-100">
         <li class="nav-item" *ngFor="let item of navItems">
-          <a routerLink="/{{ item.router }}" routerLinkActive="active">{{
-            item.label
-          }}</a>
+          <a routerLink="/{{ item.router }}" routerLinkActive="active">
+              <ng-container [ngSwitch]="item.icon">
+                  <app-house-solid-icon *ngSwitchCase="icon.SolidHouse" class="fillWhite mb-1"></app-house-solid-icon>
+                  <app-warehouse-solid-icon *ngSwitchCase="icon.SolidWareHouse" class="fillWhite mb-1"></app-warehouse-solid-icon>
+                  <app-chart-simple-solid-icon *ngSwitchCase="icon.SolidChartSimple" class="fillWhite mb-1"></app-chart-simple-solid-icon>
+                  <app-receipt-solid-icon *ngSwitchCase="icon.SolidReceipt" class="fillWhite mb-1"></app-receipt-solid-icon>
+                  <app-user-solid-icon *ngSwitchCase="icon.SolidUser" class="fillWhite mb-1"></app-user-solid-icon>
+              </ng-container>
+              <span>{{item.label}}</span>
+          </a>
         </li>
       </ul>
     </div>
