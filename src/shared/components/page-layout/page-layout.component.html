@@ -1,4 +1,4 @@
-<div class="layout d-flex flex-column vh-100" *ngIf="isAuth; else authTemplate">
+<div class="layout d-flex flex-column vh-100">
   <div class="header d-flex align-items-center px-3">
     <ng-content select="[header]"></ng-content>
   </div>
@@ -13,11 +13,7 @@
       </ul>
     </div>
     <div class="body">
-      <ng-content select="[router]"></ng-content>
+      <router-outlet></router-outlet>
     </div>
   </section>
 </div>
-
-<ng-template #authTemplate>
-  <router-outlet></router-outlet>
-</ng-template>

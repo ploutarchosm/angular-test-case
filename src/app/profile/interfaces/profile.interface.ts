@@ -7,8 +7,8 @@ export interface IProfile {
   Email: string;
   FirstName: string;
   LastName: string;
-  PhoneNumber: number;
+  PhoneNumber: string;
   WebSiteURL: string | null;
-  AuthToken: string | undefined;
+  AuthToken?: string | undefined;
   Role: Role | undefined;
 }

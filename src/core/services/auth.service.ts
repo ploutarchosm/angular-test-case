@@ -10,13 +10,15 @@ export class AuthService {
   private profileSubject!: BehaviorSubject<IProfile | null>;
   public profile!: Observable<IProfile | null>;
 
-  protected baseUrl = `${environment.apiUrl}/login`;
+  protected baseUrl = `${environment.apiUrl}/auth`;
 
   constructor(
     private router: Router,
     private http: HttpClient
   ) {
-    this.profileSubject = new BehaviorSubject<IProfile | null>(null);
+    this.profileSubject = new BehaviorSubject(
+      JSON.parse(localStorage.getItem('user')!)
+    );
     this.profile = this.profileSubject.asObservable();
   }
 
@@ -24,20 +26,29 @@ export class AuthService {
     return this.profileSubject.value;
   }
 
-  public login(email: string, password: string) {
+  public get profileRoles() {
+    return this.profileValue?.Role!;
+  }
+
+  public login(Email: string, Password: string) {
     return this.http
-      .post<any>(
-        `${this.baseUrl}/authenticate`,
-        { email, password },
+      .post<IProfile>(
+        `${this.baseUrl}/login`,
+        { Email, Password },
         { withCredentials: true }
       )
       .pipe(
         map(profile => {
+          localStorage.setItem('user', JSON.stringify(profile));
           this.profileSubject.next(profile);
           return profile;
         })
       );
   }
 
-  public logout() {}
+  public logout() {
+    localStorage.removeItem('user');
+    this.profileSubject.next(null);
+    this.router.navigate(['/auth/login']);
+  }
 }

@@ -5,9 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'shared';
 import { ProfilePageComponent } from './pages/profile-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PageLayoutComponent } from '../../shared/components/page-layout/page-layout.component';
 
 const routes: Routes = [
-  { path: '', component: ProfilePageComponent, title: 'Profile' },
+  {
+    path: '',
+    component: PageLayoutComponent,
+    title: 'Profile',
+    children: [{ path: '', component: ProfilePageComponent }],
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

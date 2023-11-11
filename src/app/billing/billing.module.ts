@@ -4,9 +4,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'shared';
 import { BillingPageComponent } from './pages/billing-page.component';
+import { PageLayoutComponent } from '../../shared/components/page-layout/page-layout.component';
 
 const routes: Routes = [
-  { path: '', component: BillingPageComponent, title: 'Billing' },
+  {
+    path: '',
+    component: PageLayoutComponent,
+    title: 'Billing',
+    children: [{ path: '', component: BillingPageComponent }],
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

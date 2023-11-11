@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormTyped } from '../../../shared/types/form.types';
+import { FormTyped } from '../../../shared/types/form.type';
 import { IProfile } from '../interfaces/profile.interface';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -17,7 +17,7 @@ export class ProfilePageComponent {
     ),
     FirstName: new FormControl<string>('', { nonNullable: true }),
     LastName: new FormControl<string>('', { nonNullable: true }),
-    PhoneNumber: new FormControl<number>(0, { nonNullable: true }),
+    PhoneNumber: new FormControl<string>('', { nonNullable: true }),
     WebSiteURL: new FormControl<string | null>(null),
   });
 }
