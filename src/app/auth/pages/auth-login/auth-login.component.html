@@ -1,0 +1,26 @@
+<div class="card" style="width: 25rem">
+  <div class="card-header">Login</div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email" />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="password" />
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>

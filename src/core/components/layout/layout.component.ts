@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services';
 
 interface INavigation {
   label: string;
@@ -18,4 +19,10 @@ export class LayoutComponent {
     { label: 'Billing', router: 'billing' },
     { label: 'Profile', router: 'profile' },
   ];
+
+  constructor(private authService: AuthService) {}
+
+  get isAuth() {
+    return !!this.authService.profileValue;
+  }
 }
