@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { AuthLoginComponent } from './pages/auth-login/auth-login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthLogoutComponent } from './pages/auth-logout/auth-logout.component';
 
 const routes: Routes = [
   {
@@ -14,12 +15,16 @@ const routes: Routes = [
         path: 'login',
         component: AuthLoginComponent,
       },
+      {
+        path: 'logout',
+        component: AuthLogoutComponent,
+      },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [AuthPageComponent, AuthLoginComponent],
+  declarations: [AuthPageComponent, AuthLoginComponent, AuthLogoutComponent],
   imports: [
     CommonModule,
     FormsModule,

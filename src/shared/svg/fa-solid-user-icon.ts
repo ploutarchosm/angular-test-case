@@ -1,7 +1,7 @@
-import {Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-user-solid-icon,[app-user-solid-icon]',
-    templateUrl: '../../assets/svg/fa-solid-user.svg',
+  selector: 'app-user-solid-icon,[app-user-solid-icon]',
+  templateUrl: '../../assets/svg/fa-solid-user.svg',
 })
-export class FaSolidUserIcon {}
+export class AppFaSolidUserIconComponent {}

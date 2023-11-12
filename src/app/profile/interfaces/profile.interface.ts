@@ -1,4 +1,4 @@
-import {FormTyped} from "../../../shared/types/form.type";
+import { FormTyped } from '../../../shared/types/form.type';
 
 export enum Role {
   User = 'User',
@@ -6,7 +6,7 @@ export enum Role {
 }
 
 export interface IProfile {
-    Id: number;
+  Id: number;
   Email: string;
   FirstName: string;
   LastName: string;
@@ -16,6 +16,8 @@ export interface IProfile {
   Role: Role | undefined;
 }
 
-
 export type TProfileFormModel = Omit<FormTyped<IProfile>, 'AuthToken' | 'Role'>;
-export type TProfileServerModel = Omit<IProfile, 'Email' | 'AuthToken' | 'Role'>;
+export type TProfileServerModel = Omit<
+  IProfile,
+  'Email' | 'AuthToken' | 'Role'
+>;

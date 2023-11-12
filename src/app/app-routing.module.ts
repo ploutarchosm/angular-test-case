@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../core/helpers/auth.guard';
 import { Role } from './profile';
+import { NotAuthGuard } from '../core/helpers/not-auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -40,6 +41,7 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('app/auth/auth.module').then(m => m.AuthModule),
+    canActivate: [NotAuthGuard],
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
@@ -47,6 +49,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard],
+  providers: [AuthGuard, NotAuthGuard],
 })
 export class AppRoutingModule {}

@@ -26,6 +26,6 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [ProfilePageComponent]
+  declarations: [ProfilePageComponent],
 })
 export class ProfileModule {}

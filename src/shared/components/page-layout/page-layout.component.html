@@ -1,29 +1,67 @@
 <div class="layout d-flex flex-column vh-100">
   <div class="header d-flex align-items-center px-3">
-      <div class="logo text-white flex-grow-1">
-          AppLogo
+    <div class="logo text-white flex-grow-1">AppLogo</div>
+    <button
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+      appDropdown
+      #r="appDropDown"
+      class="btn dr dropdown-toggle border-0 rounded-0 profile px-3 h-100 d-flex align-items-center gap-3 bg-secondary text-white">
+      <app-user-solid-icon
+        class="d-flex align-items-center justify-content-center fillWhite border rounded-circle profileSize"></app-user-solid-icon>
+      <div class="d-flex flex-column align-items-start">
+        <span>{{ profile.FirstName }} {{ profile.LastName }}</span>
+        <small>{{ profile.Email }}</small>
       </div>
-      <div class="profile px-3 h-100 d-flex align-items-center gap-3 bg-secondary text-white">
-          <app-user-solid-icon class="fillWhite mb-1 border rounded-circle"></app-user-solid-icon>
-          <div class="d-flex flex-column justify-content-center ">
-              <span>Ploutarchos Michaelides</span>
-              <small>info@ploutarchosm.com</small>
-          </div>
+
+      <div
+        [ngClass]="{ show: r.isOpen }"
+        class="dropdown-menu"
+        aria-labelledby="dropdownMenuButton">
+        <a
+          routerLink="/profile"
+          class="dropdown-item d-flex gap-2 align-items-center"
+          style="cursor: pointer">
+          <app-user-solid-icon class="fillPrimary lh-1"></app-user-solid-icon>
+          <span>Profile</span></a
+        >
+        <a
+          routerLink="/auth/logout"
+          class="dropdown-item d-flex gap-2 align-items-center"
+          style="cursor: pointer">
+          <app-right-from-bracket-solid-icon
+            class="fillPrimary lh-1"></app-right-from-bracket-solid-icon>
+          <span>Logout</span></a
+        >
       </div>
+    </button>
   </div>
   <section class="flex-grow-1">
     <div class="sidebar">
       <ul class="nav flex-column h-100">
         <li class="nav-item" *ngFor="let item of navItems">
           <a routerLink="/{{ item.router }}" routerLinkActive="active">
-              <ng-container [ngSwitch]="item.icon">
-                  <app-house-solid-icon *ngSwitchCase="icon.SolidHouse" class="fillWhite mb-1"></app-house-solid-icon>
-                  <app-warehouse-solid-icon *ngSwitchCase="icon.SolidWareHouse" class="fillWhite mb-1"></app-warehouse-solid-icon>
-                  <app-chart-simple-solid-icon *ngSwitchCase="icon.SolidChartSimple" class="fillWhite mb-1"></app-chart-simple-solid-icon>
-                  <app-receipt-solid-icon *ngSwitchCase="icon.SolidReceipt" class="fillWhite mb-1"></app-receipt-solid-icon>
-                  <app-user-solid-icon *ngSwitchCase="icon.SolidUser" class="fillWhite mb-1"></app-user-solid-icon>
-              </ng-container>
-              <span>{{item.label}}</span>
+            <ng-container [ngSwitch]="item.icon">
+              <app-house-solid-icon
+                *ngSwitchCase="icon.SolidHouse"
+                class="fillWhite mb-1"></app-house-solid-icon>
+              <app-warehouse-solid-icon
+                *ngSwitchCase="icon.SolidWareHouse"
+                class="fillWhite mb-1"></app-warehouse-solid-icon>
+              <app-chart-simple-solid-icon
+                *ngSwitchCase="icon.SolidChartSimple"
+                class="fillWhite mb-1"></app-chart-simple-solid-icon>
+              <app-receipt-solid-icon
+                *ngSwitchCase="icon.SolidReceipt"
+                class="fillWhite mb-1"></app-receipt-solid-icon>
+              <app-user-solid-icon
+                *ngSwitchCase="icon.SolidUser"
+                class="fillWhite mb-1"></app-user-solid-icon>
+            </ng-container>
+            <span>{{ item.label }}</span>
           </a>
         </li>
       </ul>

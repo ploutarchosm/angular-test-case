@@ -1,41 +1,38 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../core/services';
-import { Role } from '../../../app/profile';
-import {EIcon, INavigation} from "../../types/menu.type";
-import {menu} from "../../helpers/menu.helper";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { EIcon, INavigation } from '../../types/menu.type';
+import { ProfileService } from '../../services';
+import { Subject, takeUntil } from 'rxjs';
+import { IProfile } from '../../../app/profile';
 
 @Component({
   selector: 'app-page-layout',
   templateUrl: './page-layout.component.html',
   styleUrls: ['./page-layout.component.scss'],
 })
-export class PageLayoutComponent implements OnInit {
+export class PageLayoutComponent implements OnInit, OnDestroy {
   navItems: INavigation[] = [];
-  profile = this.authService.profileValue;
   icon = EIcon;
+  _notifier = new Subject<void>();
+  profile!: IProfile;
 
-  constructor(
-    private authService: AuthService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private profileService: ProfileService) {}
 
   ngOnInit(): void {
-    if (this.profile) {
-      this.rebuildMenu(this.profile.Role);
-    }
+    this.profileService
+      .initialProfile$()
+      .pipe(takeUntil(this._notifier))
+      .subscribe({
+        next: profile => {
+          if (profile) {
+            this.profile = profile;
+            this.navItems = this.profileService.rebuildMenu(profile.Role);
+          }
+        },
+      });
   }
 
-  rebuildMenu(role: Role | undefined) {
-    const newMenu: INavigation[] = [];
-    menu.map(item => {
-      if (
-        item.permissions &&
-        item.permissions.some(x => x == this.authService.profileRoles)
-      ) {
-        newMenu.push(item);
-      }
-    });
-    this.navItems = newMenu;
-    this.cdr.detectChanges();
+  ngOnDestroy() {
+    this._notifier.next();
+    this._notifier.complete();
   }
 }
