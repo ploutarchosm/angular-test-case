@@ -5,6 +5,7 @@ import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { AuthLoginComponent } from './pages/auth-login/auth-login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthLogoutComponent } from './pages/auth-logout/auth-logout.component';
+import { AlertModule } from '../alert';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
   declarations: [AuthPageComponent, AuthLoginComponent, AuthLogoutComponent],
   imports: [
     CommonModule,
+    AlertModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),

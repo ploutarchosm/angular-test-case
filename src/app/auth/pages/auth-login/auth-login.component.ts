@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services';
 import { first } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../../../alert';
 
 interface AuthFormModel {
   email: FormControl<string>;
@@ -32,7 +33,8 @@ export class AuthLoginComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertService: AlertService
   ) {}
 
   get f() {
@@ -58,6 +60,10 @@ export class AuthLoginComponent {
         },
         error: error => {
           this.submitting = false;
+          this.alertService.error(error, {
+            autoClose: true,
+            keepAfterRouteChange: true,
+          });
         },
       });
   }

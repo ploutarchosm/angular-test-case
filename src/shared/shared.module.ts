@@ -12,6 +12,7 @@ import { AppFaSolidUserIconComponent } from './svg/fa-solid-user-icon';
 import { AppFaSolidReceiptIconComponent } from './svg/fa-solid-receipt-icon';
 import { AppFaSolidChartSimpleIconComponent } from './svg/fa-solid-chart-simple-icon';
 import { AppFaSolidRightFromBracketIconComponent } from './svg/fa-solid-right-from-bracket-icon';
+import { AlertModule } from '../app/alert';
 
 const icons = [
   AppFaSolidHouseIconComponent,
@@ -22,7 +23,7 @@ const icons = [
   AppFaSolidRightFromBracketIconComponent,
 ];
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, AlertModule],
   providers: [ProfileService],
   declarations: [
     PageTitleComponent,

@@ -3,6 +3,7 @@ import { TProfileFormModel } from '../interfaces/profile.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { first, Subject, takeUntil } from 'rxjs';
 import { ProfileService } from '../../../shared';
+import { AlertService } from '../../alert';
 
 @Component({
   selector: 'app-profile-page',
@@ -14,7 +15,10 @@ export class ProfilePageComponent implements OnDestroy {
   submitting = false;
   submitted = false;
 
-  constructor(private profileService: ProfileService) {
+  constructor(
+    private profileService: ProfileService,
+    private alertService: AlertService
+  ) {
     this.profileService
       .initialProfile$()
       .pipe(takeUntil(this._notifier))
@@ -70,7 +74,11 @@ export class ProfilePageComponent implements OnDestroy {
       })
       .pipe(first())
       .subscribe({
-        next: r => {},
+        next: r => {
+          this.alertService.success('Successfully update profile', {
+            autoClose: true,
+          });
+        },
         error: error => {
           this.submitting = false;
         },
